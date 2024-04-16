@@ -42,3 +42,9 @@ Two types of export/import
 export default
 
 named export
+
+# 2 types of routing in Web Apps
+
+- CLient Side Routing-
+
+- Server Side Routing- if I click in a tag it reloads the page, makes a network call and loads the page
