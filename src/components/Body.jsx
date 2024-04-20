@@ -3,11 +3,16 @@ import resObj from "../utils/mockData";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus == false) return <h1>You are Offline</h1>;
 
   useEffect(() => {
     console.log("hello");
