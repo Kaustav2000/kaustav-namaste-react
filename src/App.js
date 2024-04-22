@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -7,6 +7,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+import UserContext from "./utils/UserContext";
 // import Grocery from "./components/Grocery";
 
 const Grocery = lazy(() => import("./components/Grocery")); // for bundling
@@ -75,18 +76,33 @@ const Heading = () => (
 */
 
 const AppLayout = () => {
+  const [userName, setUserName] = useState();
+
+  //authentication
+
+  useEffect(() => {
+    // make api call and send username and pasword
+    const data = {
+      name: "Kaustav",
+    };
+
+    setUserName(data.name);
+  }, []);
+
   return (
-    <div className="app">
-      <Header />
-      {/* if my path is / */}
-      <Outlet />
+    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+      <div className="app">
+        <Header />
+        {/* if my path is / */}
+        <Outlet />
 
-      {/* if my path is /about */}
-      {/* <About /> */}
+        {/* if my path is /about */}
+        {/* <About /> */}
 
-      {/* if my path is /contact */}
-      {/* <Contact /> */}
-    </div>
+        {/* if my path is /contact */}
+        {/* <Contact /> */}
+      </div>
+    </UserContext.Provider>
   );
 };
 

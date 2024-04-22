@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import resObj from "../utils/mockData";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -13,6 +14,8 @@ const Body = () => {
   const onlineStatus = useOnlineStatus();
 
   if (onlineStatus == false) return <h1>You are Offline</h1>;
+
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
     console.log("hello");
@@ -38,6 +41,8 @@ const Body = () => {
     );
   };
 
+  const { setUserName, loggedInUser } = useContext(UserContext);
+
   return listOfRestaurants.length === 0 ? (
     <Shimmer></Shimmer>
   ) : (
@@ -61,7 +66,7 @@ const Body = () => {
             Search
           </button>
         </div>
-        <button
+        {/* <button
           className="filter-btn"
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
@@ -71,7 +76,16 @@ const Body = () => {
           }}
         >
           Top Rated Restaurants
-        </button>
+        </button> */}
+        <div className="search m-4 p-4 flex items-center">
+          <label htmlFor="">User Name :</label>
+          <input
+            type="text"
+            value={loggedInUser}
+            className="border border-black p-2"
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
       </div>
       <div className="res-container">
         {filteredRestaurant.map((resData) => (
@@ -80,7 +94,12 @@ const Body = () => {
             to={"/restaurant/" + resData.info.id}
             style={{ textDecoration: "none" }}
           >
-            <RestaurantCard key={resData.info.id} resData={resData} />
+            {resData.info.promoted == true ? (
+              <RestaurantCardPromoted resData={resData} />
+            ) : (
+              <RestaurantCard resData={resData} />
+            )}
+            {/* <RestaurantCard resData={resData} /> */}
           </Link>
         ))}
 
