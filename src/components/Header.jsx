@@ -2,12 +2,20 @@ import { useContext, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 // import UserContext from "../utils/UserContext";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
 
   const { loggedInUser } = useContext(UserContext);
+
+  // Subscribing to thee store using a Selector
+
+  const cartItems = useSelector((store) => store.cart.items);
+
+  console.log("cartItems", cartItems);
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -27,8 +35,8 @@ const Header = () => {
           <li>
             <Link to={"/grocery"}>Grocery</Link>
           </li>
-          <li>
-            <Link>Cart</Link>
+          <li className="px-4 font-bold text-xl">
+            <Link to={"/cart"}>Cart ({cartItems.length} items)</Link>
           </li>
           <button
             className="login"

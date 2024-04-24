@@ -48,3 +48,12 @@ named export
 - CLient Side Routing-
 
 - Server Side Routing- if I click in a tag it reloads the page, makes a network call and loads the page
+
+# Redux Toolkit
+
+- Install @reduxjs/toolkit and react-redux
+- Build our store
+- Connect our store to our app
+- Slice (cartSlice)
+- dispatch(action)
+- Selector
