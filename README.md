@@ -57,3 +57,19 @@ named export
 - Slice (cartSlice)
 - dispatch(action)
 - Selector
+
+# Types of Testing (Develope)
+
+- Unit Testing== test react component in isolation
+- Integration Testing
+- End to End Testing - e2e testing
+
+# setting up testing in our app
+
+- Install React testing Library
+- Install jest
+- Install Babel dependencies
+- Connfigure Babel
+- Configure parcel config file to disable default babel transpilation
+- Jest configuration- npx jest --init
+- Install Jsdom library
