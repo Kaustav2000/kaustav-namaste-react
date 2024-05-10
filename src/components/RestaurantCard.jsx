@@ -10,7 +10,7 @@ const RestaurantCard = ({ resData }) => {
     cloudinaryImageId,
   } = resData?.info;
   return (
-    <div className="res-card">
+    <div data-testid="resCard" className="res-card">
       <img className="res-logo" src={CDN_URL + cloudinaryImageId} alt="" />
       <h3>{name}</h3>
       <h4>{cuisines?.join(", ")}</h4>

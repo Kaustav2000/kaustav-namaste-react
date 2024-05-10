@@ -43,7 +43,7 @@ const Body = () => {
 
   const { setUserName, loggedInUser } = useContext(UserContext);
 
-  return listOfRestaurants.length === 0 ? (
+  return listOfRestaurants?.length === 0 ? (
     <Shimmer></Shimmer>
   ) : (
     <div className="body">
@@ -54,6 +54,7 @@ const Body = () => {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             className="search-box"
+            data-testid="searchInput"
           />
           <button
             onClick={() => {
@@ -88,7 +89,7 @@ const Body = () => {
         </div>
       </div>
       <div className="res-container">
-        {filteredRestaurant.map((resData) => (
+        {filteredRestaurant?.map((resData) => (
           <Link
             key={resData.info.id}
             to={"/restaurant/" + resData.info.id}
